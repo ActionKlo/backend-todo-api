@@ -1,6 +1,8 @@
 package main
 
-import "todoBackedAPI/routers"
+import (
+	"todoBackedAPI/routers"
+)
 
 func main() {
 	router := routers.SetupRouters()

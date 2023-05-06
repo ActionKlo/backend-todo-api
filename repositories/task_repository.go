@@ -39,3 +39,11 @@ func GetTaskById(id string) (*models.Task, error) {
 
 	return task, nil
 }
+
+func CreateTask(task models.Task) error {
+	db := Connect()
+
+	db.Create(&task)
+
+	return nil
+}

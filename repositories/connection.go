@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
+	"todoBackedAPI/models"
 )
 
 func ConnectDB() (*gorm.DB, error) {
@@ -11,6 +12,8 @@ func ConnectDB() (*gorm.DB, error) {
 		DSN:                  "host=localhost user=postgres password=admin dbname=postgres port=5432 sslmode=disable TimeZone=Europe/Warsaw",
 		PreferSimpleProtocol: true, // disables implicit prepared statement usage
 	}), &gorm.Config{})
+
+	db.AutoMigrate(models.Task{})
 
 	if err != nil {
 		fmt.Println(err)

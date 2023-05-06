@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
+	"todoBackedAPI/models"
 	"todoBackedAPI/repositories"
 )
 
@@ -24,4 +25,32 @@ func GetTaskById(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, task)
 	}
+}
+
+func CreateTask(c *gin.Context) {
+	var task models.Task
+	fmt.Println(task.Title, task.Description)
+
+	err := c.BindJSON(&task)
+
+	if err != nil {
+		fmt.Println(err.Error())
+		c.JSON(http.StatusBadRequest, gin.H{
+			"err": "bad request",
+		})
+		return
+	}
+
+	err = repositories.CreateTask(task)
+
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"err": "something went wrong",
+		})
+		return
+	}
+
+	c.JSON(http.StatusCreated, gin.H{
+		"msg": "created",
+	})
 }

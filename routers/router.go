@@ -10,6 +10,7 @@ func SetupRouters() *gin.Engine {
 
 	router.GET("/tasks", controllers.GetAllTasks)
 	router.GET("/task/:id", controllers.GetTaskById)
+	router.POST("/task", controllers.CreateTask)
 
 	return router
 }

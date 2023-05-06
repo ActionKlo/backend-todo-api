@@ -8,7 +8,8 @@ import (
 func SetupRouters() *gin.Engine {
 	router := gin.Default()
 
-	router.GET("/", controllers.SayHello)
+	router.GET("/tasks", controllers.GetAllTasks)
+	router.GET("/task/:id", controllers.GetTaskById)
 
 	return router
 }

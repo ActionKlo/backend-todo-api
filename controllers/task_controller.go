@@ -7,11 +7,21 @@ import (
 	"todoBackedAPI/repositories"
 )
 
-func SayHello(c *gin.Context) {
-	fmt.Println("SayHello")
+func GetAllTasks(c *gin.Context) {
 	tasks := repositories.GetAllTasks()
-	fmt.Println(tasks)
-	c.JSON(http.StatusOK, gin.H{
-		"message": tasks,
-	})
+
+	c.JSON(http.StatusOK, tasks)
+}
+
+func GetTaskById(c *gin.Context) {
+	id := c.Params[0].Value
+	task, err := repositories.GetTaskById(id)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(http.StatusOK, gin.H{
+			"err": "task not found",
+		})
+	} else {
+		c.JSON(http.StatusOK, task)
+	}
 }

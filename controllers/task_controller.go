@@ -54,3 +54,9 @@ func CreateTask(c *gin.Context) {
 		"msg": "created",
 	})
 }
+
+func DeleteTaskById(c *gin.Context) {
+	id := c.Params[0].Value
+
+	repositories.DeleteTaskById(id)
+}

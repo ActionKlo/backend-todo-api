@@ -8,10 +8,7 @@ import (
 )
 
 func Connect() *gorm.DB {
-	db, err := ConnectDB()
-	if err != nil {
-		panic(err)
-	}
+	db := ConnectDB()
 
 	return db
 }
@@ -46,4 +43,10 @@ func CreateTask(task models.Task) error {
 	db.Create(&task)
 
 	return nil
+}
+
+func DeleteTaskById(id string) {
+	db := Connect()
+
+	db.Delete(&models.Task{}, id)
 }

@@ -12,13 +12,11 @@ func SetupRouters() *gin.Engine {
 	router.GET("/tasks", controllers.GetAllTasks)
 	router.GET("/task/:id", controllers.GetTaskById)
 	router.POST("/task", controllers.CreateTask)
+	//router.PUT("/task/:id", controllers)
+	router.DELETE("/task/:id", controllers.DeleteTaskById)
 
 	router.GET("/drop-tasks", func(c *gin.Context) {
-		db, err := repositories.ConnectDB()
-
-		if err != nil {
-			panic(err)
-		}
+		db := repositories.ConnectDB()
 
 		db.Migrator().DropTable("tasks")
 	})

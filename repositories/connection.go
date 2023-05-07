@@ -7,7 +7,7 @@ import (
 	"todoBackedAPI/models"
 )
 
-func ConnectDB() (*gorm.DB, error) {
+func ConnectDB() *gorm.DB {
 	db, err := gorm.Open(postgres.New(postgres.Config{
 		DSN:                  "host=localhost user=postgres password=admin dbname=postgres port=5432 sslmode=disable TimeZone=Europe/Warsaw",
 		PreferSimpleProtocol: true, // disables implicit prepared statement usage
@@ -17,8 +17,8 @@ func ConnectDB() (*gorm.DB, error) {
 
 	if err != nil {
 		fmt.Println(err)
-		return nil, err
+		panic(err)
 	}
 
-	return db, nil
+	return db
 }

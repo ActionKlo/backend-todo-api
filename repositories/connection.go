@@ -9,8 +9,8 @@ import (
 
 func ConnectDB() *gorm.DB {
 	db, err := gorm.Open(postgres.New(postgres.Config{
-		DSN:                  "host=localhost user=postgres password=admin dbname=postgres port=5432 sslmode=disable TimeZone=Europe/Warsaw",
-		PreferSimpleProtocol: true, // disables implicit prepared statement usage
+		DSN:                  "host=localhost user=postgres password=admin dbname=postgres port=5432 sslmode=disable TimeZone=Europe/Warsaw", // TODO вынести в .env файл
+		PreferSimpleProtocol: true,
 	}), &gorm.Config{})
 
 	db.AutoMigrate(models.Task{})

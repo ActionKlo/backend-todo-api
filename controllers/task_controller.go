@@ -55,6 +55,10 @@ func CreateTask(c *gin.Context) {
 	})
 }
 
+func UpdateTaskById(c *gin.Context) {
+
+}
+
 func DeleteTaskById(c *gin.Context) {
 	id := c.Params[0].Value
 
